@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/oil.iml" filepath="$PROJECT_DIR$/oil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oil-admin/oil-admin.iml" filepath="$PROJECT_DIR$/oil-admin/oil-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oil-common/oil-common.iml" filepath="$PROJECT_DIR$/oil-common/oil-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oil-upms/oil-upms.iml" filepath="$PROJECT_DIR$/oil-upms/oil-upms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oil-upms/oil-upms-client/oil-upms-client.iml" filepath="$PROJECT_DIR$/oil-upms/oil-upms-client/oil-upms-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oil-upms/oil-upms-dao/oil-upms-dao.iml" filepath="$PROJECT_DIR$/oil-upms/oil-upms-dao/oil-upms-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oil-upms/oil-upms-rpc-api/oil-upms-rpc-api.iml" filepath="$PROJECT_DIR$/oil-upms/oil-upms-rpc-api/oil-upms-rpc-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oil-upms/oil-upms-rpc-service/oil-upms-rpc-service.iml" filepath="$PROJECT_DIR$/oil-upms/oil-upms-rpc-service/oil-upms-rpc-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oil-upms/oil-upms-web/oil-upms-web.iml" filepath="$PROJECT_DIR$/oil-upms/oil-upms-web/oil-upms-web.iml" />
+    </modules>
+  </component>
+</project>
