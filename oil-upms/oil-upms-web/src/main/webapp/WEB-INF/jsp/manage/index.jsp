@@ -40,7 +40,7 @@
 		</li>
 		<li id="logo" class="hidden-xs">
 			<a href="${basePath}/manage/index">
-				<img src="${basePath}/resources/zheng-admin/images/logo.png"/>
+				<img src="${basePath}/resources/oil-admin/images/logo.png"/>
 			</a>
 			<span id="system_title">权限管理系统</span>
 		</li>

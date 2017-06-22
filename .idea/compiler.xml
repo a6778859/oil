@@ -17,7 +17,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="com-upms-web" target="1.5" />
-      <module name="oil" target="1.5" />
+      <module name="oil" target="1.7" />
       <module name="oil-admin" target="1.7" />
       <module name="oil-common" target="1.7" />
       <module name="oil-upms" target="1.5" />
