@@ -9,6 +9,7 @@ import com.oil.upms.rpc.api.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,9 +28,14 @@ public class AdminServiceImpl extends BaseServiceImpl<AdminMapper, Admin, AdminE
     @Autowired
     AdminMapper adminMapper;
 
-    @Cacheable(value = "zheng-upms-rpc-service-ehcache", key = "'selectUpmsPermissionByUpmsUserId_'")
+    @Cacheable(value = "base", key = "'selectUpmsPermissionByUpmsUserId_'")
     public long countUpsByExample(AdminExample example) {
         return adminMapper.countByExample(example);
+
+    }
+
+    @CacheEvict(value="base",key="'selectUpmsPermissionByUpmsUserId_'",beforeInvocation=true)
+    public void deleteBy() {
 
     }
 

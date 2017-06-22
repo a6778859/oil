@@ -12,7 +12,7 @@
         <persistence strategy="localTempSwap"/>
     </defaultCache>
     <cache
-            name="zheng-upms-rpc-service-ehcache"
+            name="base"
             eternal="false"
             timeToIdleSeconds="120"
             timeToLiveSeconds="300"

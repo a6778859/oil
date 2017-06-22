@@ -11,4 +11,6 @@ import com.oil.upms.dao.model.AdminExample;
 public interface AdminService extends BaseService<Admin, AdminExample> {
 
     public long countUpsByExample(AdminExample example);
+
+    public void deleteBy();
 }

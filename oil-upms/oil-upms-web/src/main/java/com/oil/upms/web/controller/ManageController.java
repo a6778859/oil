@@ -5,8 +5,6 @@ import com.oil.upms.dao.model.AdminExample;
 import com.oil.upms.rpc.api.AdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +32,7 @@ public class ManageController extends BaseController {
 	public String index(ModelMap modelMap) {
 		AdminExample admin= new AdminExample();
 		admin.createCriteria().andUseridEqualTo(1);
-
-		CacheManager manager = CacheManager.create();
-		Cache cache = manager.getCache("zheng-upms-rpc-service-ehcache");
-		if(cache!=null&&cache.isKeyInCache("selectUpmsPermissionByUpmsUserId_")) {
-
-			cache.remove("selectUpmsPermissionByUpmsUserId_");
-		}
+		adminService.deleteBy();
 		System.out.println(adminService.countUpsByExample(admin));
 
 		return "/manage/index.jsp";

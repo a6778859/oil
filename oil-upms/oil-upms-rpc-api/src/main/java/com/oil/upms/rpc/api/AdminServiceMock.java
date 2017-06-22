@@ -14,4 +14,9 @@ public class AdminServiceMock extends BaseServiceMock<AdminMapper, Admin, AdminE
     public long countUpsByExample(AdminExample example) {
         return 0;
     }
+
+    @Override
+    public void deleteBy() {
+
+    }
 }
