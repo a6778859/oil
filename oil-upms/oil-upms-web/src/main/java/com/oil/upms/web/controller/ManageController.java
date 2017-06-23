@@ -35,6 +35,8 @@ public class ManageController extends BaseController {
 		adminService.deleteBy();
 		System.out.println(adminService.countUpsByExample(admin));
 
+
+
 		return "/manage/index.jsp";
 	}
 
