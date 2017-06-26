@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oil.upms.rpc.mapper.UpmsApiMapper">
+
+    <resultMap id="BaseResultMap" type="com.oil.upms.dao.model.Admin">
+        <id column="userid" jdbcType="INTEGER" property="userid"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="userpassword" jdbcType="VARCHAR" property="userpassword"/>
+        <result column="errorcount" jdbcType="INTEGER" property="errorcount"/>
+        <result column="locktime" jdbcType="TIMESTAMP" property="locktime"/>
+        <result column="lockstate" jdbcType="INTEGER" property="lockstate"/>
+        <result column="totalmoney" jdbcType="DECIMAL" property="totalmoney"/>
+        <result column="addtime" jdbcType="TIMESTAMP" property="addtime"/>
+        <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        userid, username, userpassword, errorcount, locktime,
+        lockstate, totalmoney,
+        addtime,
+        updatetime, state,role_id
+    </sql>
+
+    <select id="selectForUser" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from admin
+        where username = #{username}
+    </select>
+
+    <!-- 缓存 -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+</mapper>

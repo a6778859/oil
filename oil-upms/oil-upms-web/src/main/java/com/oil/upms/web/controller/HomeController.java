@@ -3,8 +3,8 @@ package com.oil.upms.web.controller;
 import com.oil.common.base.BaseController;
 import com.oil.upms.dao.model.AdminExample;
 import com.oil.upms.rpc.api.AdminService;
+import com.oil.upms.rpc.api.UpmsApiService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,26 +18,44 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by ZhangShuzheng on 2017/01/19.
  */
 @Controller
-@RequestMapping("/manage")
-@Api(value = "后台管理", description = "后台管理")
-public class ManageController extends BaseController {
+@RequestMapping("/Home")
+@Api(value = "后台管理", description = "前台登陆")
+public class HomeController extends BaseController {
 
-	private static Logger _log = LoggerFactory.getLogger(ManageController.class);
+	private static Logger _log = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
 	AdminService adminService;
+	@Autowired
+	UpmsApiService upmsApiService;
 
-	@ApiOperation(value = "后台首页")
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String index(ModelMap modelMap) {
+
+		System.out.println(upmsApiService.selectForUser("ad"));
+
+
+
 		AdminExample admin= new AdminExample();
 		admin.createCriteria().andUseridEqualTo(1);
 		adminService.deleteBy();
 		System.out.println(adminService.countUpsByExample(admin));
-
-
-
-		return "/manage/index.jsp";
+		return "/Home/login.jsp";
 	}
+
+
+
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public String user(ModelMap modelMap) {
+		AdminExample admin= new AdminExample();
+		admin.createCriteria().andUseridEqualTo(1);
+		adminService.deleteBy();
+		System.out.println(adminService.countUpsByExample(admin));
+		return "/Home/usr.jsp";
+	}
+
+
 
 }

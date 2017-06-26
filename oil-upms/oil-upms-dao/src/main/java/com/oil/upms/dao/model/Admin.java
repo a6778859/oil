@@ -70,6 +70,13 @@ public class Admin implements Serializable {
      */
     private Integer state;
 
+    /**
+     * 用户权限
+     *
+     * @mbg.generated
+     */
+    private String roleId;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getUserid() {
@@ -152,6 +159,14 @@ public class Admin implements Serializable {
         this.state = state;
     }
 
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -168,6 +183,7 @@ public class Admin implements Serializable {
         sb.append(", addtime=").append(addtime);
         sb.append(", updatetime=").append(updatetime);
         sb.append(", state=").append(state);
+        sb.append(", roleId=").append(roleId);
         sb.append("]");
         return sb.toString();
     }
@@ -193,7 +209,8 @@ public class Admin implements Serializable {
             && (this.getTotalmoney() == null ? other.getTotalmoney() == null : this.getTotalmoney().equals(other.getTotalmoney()))
             && (this.getAddtime() == null ? other.getAddtime() == null : this.getAddtime().equals(other.getAddtime()))
             && (this.getUpdatetime() == null ? other.getUpdatetime() == null : this.getUpdatetime().equals(other.getUpdatetime()))
-            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()));
+            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
+            && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()));
     }
 
     @Override
@@ -210,6 +227,7 @@ public class Admin implements Serializable {
         result = prime * result + ((getAddtime() == null) ? 0 : getAddtime().hashCode());
         result = prime * result + ((getUpdatetime() == null) ? 0 : getUpdatetime().hashCode());
         result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
+        result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
         return result;
     }
 }

@@ -4,6 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <!-- 启动解压zhengAdmin-x.x.x.jar到resources目录 -->
-    <bean id="zhengAdminUtil" class="com.oil.common.util.ZhengAdminUtil"></bean>
+    <bean id="oildminUtil" class="com.oil.common.util.OilAdminUtil"></bean>
 
 </beans>
