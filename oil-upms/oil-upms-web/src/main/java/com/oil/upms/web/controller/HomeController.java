@@ -2,6 +2,7 @@ package com.oil.upms.web.controller;
 
 import com.oil.common.base.BaseController;
 import com.oil.common.util.MD5Util;
+import com.oil.common.util.RedisUtil;
 import com.oil.upms.dao.model.AdminExample;
 import com.oil.upms.rpc.api.AdminService;
 import com.oil.upms.rpc.api.UpmsApiService;
@@ -30,17 +31,56 @@ import java.io.IOException;
 public class HomeController extends BaseController {
 
     private static Logger _log = LoggerFactory.getLogger(HomeController.class);
-
+    private final static String OIL_UPMS_SHIRO_SESSION_ID = "oil-upms-shiro-session-id";
     @Autowired
     AdminService adminService;
     @Autowired
     UpmsApiService upmsApiService;
 
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String test(ModelMap modelMap) throws IOException {
+        String sessionId = session.getId().toString();
+
+//        Subject currentUser = SecurityUtils.getSubject();
+//        Session session = currentUser.getSession();
+        session.setAttribute("8859","8859");
+
+
+        System.out.println((RedisUtil.get(OIL_UPMS_SHIRO_SESSION_ID+ "_" + sessionId)));
+
+        write(sessionId);
+        return null;
+    }
+
+    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+    public String test2(ModelMap modelMap) throws IOException {
+
+        java.util.Enumeration e = request.getSession().getAttributeNames();
+        while( e.hasMoreElements()) {
+            String sessionName=(String)e.nextElement();
+            System.out.println("\nsession item name="+sessionName);
+            System.out.println("\nsession item value="+request.getSession().getAttribute(sessionName));
+        }
+
+
+        write(session.getAttribute("8859")+"");
+        return null;
+    }
+
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String index(ModelMap modelMap) {
+        String sessionId = session.getId().toString();
+        System.out.println(sessionId);
         return "/home/login.jsp";
     }
+
+    @RequestMapping(value = "/out", method = RequestMethod.GET)
+    public String out(ModelMap modelMap) throws IOException {
+        SecurityUtils.getSubject().logout();
+        return "redirect:/home/login";
+    }
+
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

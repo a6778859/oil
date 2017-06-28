@@ -58,6 +58,7 @@ public class RedisUtil {
 	 */
 	private static void initialPool() {
 		try {
+			System.out.println(PORT);
 			JedisPoolConfig config = new JedisPoolConfig();
 			config.setMaxTotal(MAX_ACTIVE);
 			config.setMaxIdle(MAX_IDLE);

@@ -1,27 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="
-http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- 配置权限管理器 -->
+<!-- 配置权限管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- ref对应我们写的realm  MyShiro -->
         <property name="realm" ref="upmsRealm"/>
         <!-- 使用下面配置的缓存管理器 -->
         <property name="cacheManager" ref="cacheManager"/>
-
+        <property name="sessionManager" ref="webSessionManager"/>
     </bean>
 
     <!-- 配置shiro的过滤器工厂类，id- shiroFilter要和我们在web.xml中配置的过滤器一致 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-
         <!-- 调用我们配置的权限管理器 -->
         <property name="securityManager" ref="securityManager"/>
         <!-- 配置我们的登录请求地址 -->
@@ -30,11 +24,14 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="successUrl" value="/home/user"/>
         <!-- 如果您请求的资源不再您的权限范围，则跳转到/403请求地址 -->
         <property name="unauthorizedUrl" value="/403"/>
+
         <!-- 权限配置 -->
         <property name="filterChainDefinitions">
             <value>
                 <!-- anon表示此地址不需要任何权限即可访问 -->
                 /home/login=anon
+                /home/test=anon
+                /home/test2=anon
                 <!-- perms[user:query]表示访问此连接需要权限为user:query的用户 -->
                 <!-- /user=perms[user:query] -->
                <!-- roles[manager]表示访问此连接需要用户的角色为manager -->
@@ -43,12 +40,34 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
                 /** = authc
             </value>
         </property>
-
     </bean>
 
 
     <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+   <!-- Shiro生命周期处理器-->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
     <bean id="upmsRealm" class="com.oil.upms.client.MyShiro"></bean>
+
+
+
+    <bean id="webSessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="sessionDAO" ref="redisSessionDao"/>
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="sessionIdCookie" ref="sharesession"/>
+        <property name="sessionIdUrlRewritingEnabled" value="false"/>
+        <!-- 定时检查失效的session -->
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+    </bean>
+
+    <bean id="sharesession" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <!-- cookie的name,对应的默认是 JSESSIONID -->
+        <constructor-arg name="name" value="SHAREJSESSIONID"/>
+        <!-- jsessionId的path为 / 用于多个系统共享jsessionId -->
+        <property name="path" value="/"/>
+    </bean>
+
+    <bean id="redisSessionDao" class="com.oil.upms.client.session.RedisSessionDao"></bean>
+
 
 </beans>
