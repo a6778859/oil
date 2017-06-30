@@ -2,8 +2,9 @@ package com.oil.upms.dao.mapper;
 
 import com.oil.upms.dao.model.Admin;
 import com.oil.upms.dao.model.AdminExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface AdminMapper {
     long countByExample(AdminExample example);

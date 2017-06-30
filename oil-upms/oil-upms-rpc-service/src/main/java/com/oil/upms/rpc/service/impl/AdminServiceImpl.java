@@ -32,14 +32,21 @@ public class AdminServiceImpl extends BaseServiceImpl<AdminMapper, Admin, AdminE
 
     @Cacheable(value = "base", key = "'selectUpmsPermissionByUpmsUserId_'")
     public long countUpsByExample(AdminExample example) {
-        DynamicDataSource.setDataSource(DataSourceEnum.SLAVE.getName());
+        //DynamicDataSource.setDataSource(DataSourceEnum.SLAVE.getName());
         return adminMapper.countByExample(example);
 
     }
 
-    @CacheEvict(value="base",key="'selectUpmsPermissionByUpmsUserId_'",beforeInvocation=true)
+    @CacheEvict(value = "base", key = "'selectUpmsPermissionByUpmsUserId_'", beforeInvocation = true)
     public void deleteBy() {
 
     }
+
+
+    public Admin selectByPrimaryKey2(Integer id) {
+        DynamicDataSource.setDataSource(DataSourceEnum.SLAVE.getName());
+        return adminMapper.selectByPrimaryKey(id);
+    }
+
 
 }

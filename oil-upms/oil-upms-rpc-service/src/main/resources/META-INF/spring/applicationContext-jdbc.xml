@@ -4,6 +4,7 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:beans="http://jboss.org/xml/ns/javax/validation/mapping"
        xsi:schemaLocation="
           http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -110,5 +111,13 @@
 
     <!-- 启动注解事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="manyDataSourceAspect" class="com.oil.upms.dao.DataSource.DataSourceAspect" />
+    <aop:config>
+        <aop:aspect id="c" ref="manyDataSourceAspect">
+            <aop:pointcut id="tx" expression="execution(* com.oil.upms.dao.mapper.*.*(..))"/>
+            <aop:before pointcut-ref="tx" method="before"/>
+        </aop:aspect>
+    </aop:config>
 
 </beans>

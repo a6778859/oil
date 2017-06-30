@@ -7,4 +7,7 @@
     <!-- ApplicationContext -->
     <bean id="springContextUtil" class="com.oil.common.util.SpringContextUtil"></bean>
 
+
+
+
 </beans>
