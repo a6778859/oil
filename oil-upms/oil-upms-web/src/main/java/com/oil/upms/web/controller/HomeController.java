@@ -2,7 +2,6 @@ package com.oil.upms.web.controller;
 
 import com.oil.common.base.BaseController;
 import com.oil.common.util.MD5Util;
-import com.oil.common.util.RedisUtil;
 import com.oil.upms.dao.model.AdminExample;
 import com.oil.upms.rpc.api.AdminService;
 import com.oil.upms.rpc.api.UpmsApiService;
@@ -39,31 +38,46 @@ public class HomeController extends BaseController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test(ModelMap modelMap) throws IOException {
-        String sessionId = session.getId().toString();
 
-//        Subject currentUser = SecurityUtils.getSubject();
-//        Session session = currentUser.getSession();
-        session.setAttribute("8859","8859");
+        AdminExample admin = new AdminExample();
+        admin.createCriteria().andUseridEqualTo(3);
+        adminService.deleteBy();
+        System.out.println(adminService.countUpsByExample(admin));
 
 
-        System.out.println((RedisUtil.get(OIL_UPMS_SHIRO_SESSION_ID+ "_" + sessionId)));
-
-        write(sessionId);
+//        Admin test=adminService.selectByPrimaryKey(1);
+//        System.out.println(test);
         return null;
+
+//        Admin test=adminService.selectByPrimaryKey(1);
+//        System.out.println(test);
+
+
+//        Admin a = upmsApiService.selectForUser("admin");
+//        //Admin b = upmsApiService.selectForUser2("admin");
+//        String sessionId = session.getId().toString();
+//
+//        session.setAttribute("8859", "8859");
+//
+//
+//        System.out.println((RedisUtil.get(OIL_UPMS_SHIRO_SESSION_ID + "_" + sessionId)));
+//
+//        write(sessionId);
+//        return null;
     }
 
     @RequestMapping(value = "/test2", method = RequestMethod.GET)
     public String test2(ModelMap modelMap) throws IOException {
 
         java.util.Enumeration e = request.getSession().getAttributeNames();
-        while( e.hasMoreElements()) {
-            String sessionName=(String)e.nextElement();
-            System.out.println("\nsession item name="+sessionName);
-            System.out.println("\nsession item value="+request.getSession().getAttribute(sessionName));
+        while (e.hasMoreElements()) {
+            String sessionName = (String) e.nextElement();
+            System.out.println("\nsession item name=" + sessionName);
+            System.out.println("\nsession item value=" + request.getSession().getAttribute(sessionName));
         }
 
 
-        write(session.getAttribute("8859")+"");
+        write(session.getAttribute("8859") + "");
         return null;
     }
 
@@ -82,17 +96,16 @@ public class HomeController extends BaseController {
     }
 
 
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(ModelMap modelMap) throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         try {
             SecurityUtils.getSubject().login(new UsernamePasswordToken(username, MD5Util.MD5(password)));
-        }catch (UnknownAccountException e){
+        } catch (UnknownAccountException e) {
             write("账号或密码错误");
             return null;
-        }catch (LockedAccountException e){
+        } catch (LockedAccountException e) {
             write("帐号已锁定！");
             return null;
         }

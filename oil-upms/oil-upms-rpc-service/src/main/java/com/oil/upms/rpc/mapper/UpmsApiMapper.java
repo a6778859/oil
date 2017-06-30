@@ -12,5 +12,6 @@ public interface UpmsApiMapper {
 
 
 	Admin selectForUser(@Param("username") String username);
+
 	
 }

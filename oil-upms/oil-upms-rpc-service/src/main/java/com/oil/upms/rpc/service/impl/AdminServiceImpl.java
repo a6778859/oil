@@ -2,6 +2,8 @@ package com.oil.upms.rpc.service.impl;
 
 import com.oil.common.annotation.BaseService;
 import com.oil.common.base.BaseServiceImpl;
+import com.oil.common.db.DataSourceEnum;
+import com.oil.common.db.DynamicDataSource;
 import com.oil.upms.dao.mapper.AdminMapper;
 import com.oil.upms.dao.model.Admin;
 import com.oil.upms.dao.model.AdminExample;
@@ -30,6 +32,7 @@ public class AdminServiceImpl extends BaseServiceImpl<AdminMapper, Admin, AdminE
 
     @Cacheable(value = "base", key = "'selectUpmsPermissionByUpmsUserId_'")
     public long countUpsByExample(AdminExample example) {
+        DynamicDataSource.setDataSource(DataSourceEnum.SLAVE.getName());
         return adminMapper.countByExample(example);
 
     }

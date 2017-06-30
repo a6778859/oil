@@ -20,7 +20,6 @@ public class UpmsApiServiceImpl implements UpmsApiService {
 
     private static Logger _log = LoggerFactory.getLogger(UpmsApiServiceImpl.class);
 
-
     @Autowired
     UpmsApiMapper upmsApiMapper;
 
@@ -28,4 +27,12 @@ public class UpmsApiServiceImpl implements UpmsApiService {
     public Admin selectForUser(String username) {
         return upmsApiMapper.selectForUser(username);
     }
+
+    @Override
+    public Admin selectForUser2(String username) {
+        return upmsApiMapper.selectForUser(username);
+    }
+
+
+
 }

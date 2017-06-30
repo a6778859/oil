@@ -17,4 +17,9 @@ public class UpmsApiServiceMock implements UpmsApiService {
     public Admin selectForUser(String username) {
         return null;
     }
+
+    @Override
+    public Admin selectForUser2(String username) {
+        return null;
+    }
 }

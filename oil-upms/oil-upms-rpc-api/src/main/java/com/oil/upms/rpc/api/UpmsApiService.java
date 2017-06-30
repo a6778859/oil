@@ -8,5 +8,10 @@ import org.apache.ibatis.annotations.Param;
  * Created by shuzheng on 2017/2/11.
  */
 public interface UpmsApiService {
+
+
     Admin selectForUser(@Param("username") String username);
+
+
+    Admin selectForUser2(@Param("username") String username);
 }
