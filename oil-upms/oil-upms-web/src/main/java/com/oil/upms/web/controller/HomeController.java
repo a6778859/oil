@@ -30,7 +30,6 @@ import java.io.IOException;
 public class HomeController extends BaseController {
 
     private static Logger _log = LoggerFactory.getLogger(HomeController.class);
-    private final static String OIL_UPMS_SHIRO_SESSION_ID = "oil-upms-shiro-session-id";
     @Autowired
     AdminService adminService;
     @Autowired

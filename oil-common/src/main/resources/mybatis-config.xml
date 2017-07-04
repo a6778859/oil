@@ -7,8 +7,6 @@
 	<!-- 全局配置 -->
 	<settings>
 		<setting name="cacheEnabled" value="false"/>
-		<setting name="lazyLoadingEnabled" value="false" />
-		<setting name="aggressiveLazyLoading" value="true" />
 	</settings>
 
 	<!-- 插件-->

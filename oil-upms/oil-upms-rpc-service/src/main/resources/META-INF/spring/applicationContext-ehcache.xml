@@ -37,8 +37,6 @@
     -->
 
 
-
-
     <cache:annotation-driven cache-manager="cacheManager" />
 
 
