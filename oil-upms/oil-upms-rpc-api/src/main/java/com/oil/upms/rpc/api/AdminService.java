@@ -12,9 +12,10 @@ public interface AdminService extends BaseService<Admin, AdminExample> {
 
     public long countUpsByExample(AdminExample example);
 
-
     Admin selectByPrimaryKey2(Integer id);
 
 
     public void deleteBy();
+
+    Admin test(Integer id);
 }

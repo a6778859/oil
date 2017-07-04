@@ -18,7 +18,6 @@ public interface AdminMapper {
     int insertSelective(Admin record);
 
     List<Admin> selectByExample(AdminExample example);
-
     Admin selectByPrimaryKey(Integer userid);
 
     int updateByExampleSelective(@Param("record") Admin record, @Param("example") AdminExample example);

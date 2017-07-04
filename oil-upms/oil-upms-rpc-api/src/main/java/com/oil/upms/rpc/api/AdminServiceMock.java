@@ -24,4 +24,9 @@ public class AdminServiceMock extends BaseServiceMock<AdminMapper, Admin, AdminE
     public void deleteBy() {
 
     }
+
+    @Override
+    public Admin test(Integer id) {
+        return null;
+    }
 }

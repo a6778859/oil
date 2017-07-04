@@ -29,9 +29,7 @@ public class UpmsApiServiceImpl implements UpmsApiService {
     }
 
     @Override
-    public Admin selectForUser2(String username) {
-        return upmsApiMapper.selectForUser(username);
-    }
+    public Admin selectForUser2(String username) {return upmsApiMapper.selectForUser(username);}
 
 
 

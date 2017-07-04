@@ -10,7 +10,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UpmsApiMapper {
 
-
 	Admin selectForUser(@Param("username") String username);
 
 	

@@ -30,6 +30,6 @@
     </select>
 
     <!-- 缓存 -->
-    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
 
 </mapper>

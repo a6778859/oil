@@ -7,13 +7,14 @@
        xmlns:beans="http://jboss.org/xml/ns/javax/validation/mapping"
        xsi:schemaLocation="
           http://www.springframework.org/schema/beans
-          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
           http://www.springframework.org/schema/tx
           http://www.springframework.org/schema/tx/spring-tx.xsd
           http://www.springframework.org/schema/context
           http://www.springframework.org/schema/context/spring-context.xsd
           http://www.springframework.org/schema/aop
-          http://www.springframework.org/schema/aop/spring-aop.xsd">
+          http://www.springframework.org/schema/aop/spring-aop.xsd
+">
 
     <!-- 引入jdbc配置文件 -->
     <!--<context:property-placeholder location="classpath:jdbc.properties" />-->
@@ -80,11 +81,11 @@
         <property name="filters" value="stat"/>
     </bean>
 
-    <!-- 动态数据源 -->
+    <!-- 动态数据源
     <bean id="dataSource" class="com.oil.common.db.DynamicDataSource">
         <property name="targetDataSources">
             <map key-type="java.lang.String">
-                <!-- 可配置多个数据源 -->
+
                 <entry value-ref="masterDataSource" key="masterDataSource"></entry>
                 <entry value-ref="slaveDataSource" key="slaveDataSource"></entry>
             </map>
@@ -92,11 +93,28 @@
         <property name="defaultTargetDataSource" ref="masterDataSource"></property>
     </bean>
 
+    -->
+    <!-- 动态数据源 -->
+    <!--简单的一个master和一个slaver 读写分离的数据源 -->
+    <!--简单的一个master和一个slaver 读写分离的数据源 -->
+
+    <bean id="dataSource"  class="com.oil.common.DataSource.DynamicDataSource">
+        <property name="writeDataSource"  ref="masterDataSource"></property>
+        <property name="readDataSource" ref="slaveDataSource"></property>
+    </bean>
+
+
     <!-- 为Mybatis创建SqlSessionFactory，同时指定数据源 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
-        <property name="mapperLocations" value="classpath*:com/oil/upms/dao/mapper/*Mapper.xml"/>
+        <!--<property name="mapperLocations" value="classpath*:com/oil/upms/dao/mapper/*Mapper.xml"/> -->
+        <property name="plugins">
+            <array>
+                <bean class="com.oil.common.DataSource.DynamicPlugin" />
+            </array>
+        </property>
     </bean>
     <!-- Mapper接口所在包名，Spring会自动查找其下的Mapper -->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -104,20 +122,29 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
-    <!-- 事务管理器 -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED"  />
+            <tx:method name="*" propagation="REQUIRED" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="pc" expression="execution(* com.oil.upms.rpc.service.impl.*.*(..))" />
+        <aop:advisor pointcut-ref="pc" advice-ref="txAdvice" />
+    </aop:config>
 
     <!-- 启动注解事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <bean id="manyDataSourceAspect" class="com.oil.upms.dao.DataSource.DataSourceAspect" />
-    <aop:config>
-        <aop:aspect id="c" ref="manyDataSourceAspect">
-            <aop:pointcut id="tx" expression="execution(* com.oil.upms.dao.mapper.*.*(..))"/>
-            <aop:before pointcut-ref="tx" method="before"/>
-        </aop:aspect>
-    </aop:config>
+    <!-- 事务管理器 -->
+    <bean id="transactionManager" class="com.oil.common.DataSource.DynamicDataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
 
 </beans>

@@ -29,9 +29,11 @@
         <shiro.version>1.3.2</shiro.version>
 
         <thymeleaf.version>3.0.3.RELEASE</thymeleaf.version>
+
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -320,6 +322,7 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+
     </dependencies>
 
     <build>

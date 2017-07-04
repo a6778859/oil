@@ -303,5 +303,5 @@
       role_id = #{roleId,jdbcType=VARCHAR}
     where userid = #{userid,jdbcType=INTEGER}
   </update>
-  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+
 </mapper>

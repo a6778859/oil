@@ -2,7 +2,6 @@ package com.oil.upms.web.controller;
 
 import com.oil.common.base.BaseController;
 import com.oil.common.util.MD5Util;
-import com.oil.upms.dao.model.Admin;
 import com.oil.upms.dao.model.AdminExample;
 import com.oil.upms.rpc.api.AdminService;
 import com.oil.upms.rpc.api.UpmsApiService;
@@ -40,19 +39,17 @@ public class HomeController extends BaseController {
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test(ModelMap modelMap) throws IOException {
 
-//        AdminExample admin = new AdminExample();
-//        admin.createCriteria().andUseridEqualTo(3);
-//        adminService.deleteBy();
-//       System.out.println( adminService.countUpsByExample(admin));
-       // System.out.println(adminService.countByExample(admin));
+        AdminExample admin = new AdminExample();
+        admin.createCriteria().andUseridEqualTo(3);
+        //adminService.deleteBy();
+        System.out.println( adminService.countUpsByExample(admin));
+        // System.out.println(adminService.countByExample(admin));
 
 
-        Admin test=adminService.selectByPrimaryKey2(1);
-        System.out.println(test);
-        test=adminService.selectByPrimaryKey(1);
-
-
-        System.out.println(test);
+//        Admin test = adminService.test(1);
+//        System.out.println(test);
+//        Admin test = adminService.selectByPrimaryKey(1);
+//        System.out.println(test);
         return null;
 
 //        Admin test=adminService.selectByPrimaryKey(1);

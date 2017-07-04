@@ -255,5 +255,5 @@
       remark = #{remark,jdbcType=VARCHAR}
     where orderid = #{orderid,jdbcType=INTEGER}
   </update>
-  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+
 </mapper>
