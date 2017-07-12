@@ -2,6 +2,7 @@ package com.oil.upms.web.controller;
 
 import com.oil.common.base.BaseController;
 import com.oil.common.util.MD5Util;
+import com.oil.common.util.RedisUtil;
 import com.oil.upms.dao.model.AdminExample;
 import com.oil.upms.rpc.api.AdminService;
 import com.oil.upms.rpc.api.UpmsApiService;
@@ -37,11 +38,33 @@ public class HomeController extends BaseController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test(ModelMap modelMap) throws IOException {
-
         AdminExample admin = new AdminExample();
-        admin.createCriteria().andUseridEqualTo(3);
-        //adminService.deleteBy();
+        admin.createCriteria().andUseridEqualTo(1);
+        admin.createCriteria().andUseridEqualTo(1);
+        adminService.deleteBy();
+        admin.createCriteria().andUseridEqualTo(1);
+        adminService.deleteBy();
+        MutliThread m1=new MutliThread("Window 1");
+        MutliThread m2=new MutliThread("Window 2");
+        m1.start();
+        m2.start();
+
+
+        RedisUtil.set("8859","12121",1200);
+        //
+
+        adminService.deleteBy();
         System.out.println( adminService.countUpsByExample(admin));
+        System.out.println(RedisUtil.get("8859"));
+        return null;
+//
+//        AdminExample admin = new AdminExample();
+//        admin.createCriteria().andUseridEqualTo(1);
+        //adminService.deleteBy();
+//        System.out.println( adminService.countUpsByExample(admin));
+//        System.out.println( adminService.selectByPrimaryKey2(1));
+//        System.out.println( adminService.insertByPrimaryKey3(1));
+
         // System.out.println(adminService.countByExample(admin));
 
 
@@ -49,7 +72,7 @@ public class HomeController extends BaseController {
 //        System.out.println(test);
 //        Admin test = adminService.selectByPrimaryKey(1);
 //        System.out.println(test);
-        return null;
+
 
 //        Admin test=adminService.selectByPrimaryKey(1);
 //        System.out.println(test);
@@ -66,6 +89,24 @@ public class HomeController extends BaseController {
 //
 //        write(sessionId);
 //        return null;
+    }
+
+    class MutliThread extends Thread{
+        private int ticket=10;//每个线程都拥有5张票
+        MutliThread(String name){
+            super(name);//调用父类带参数的构造方法
+        }
+        public void run(){
+            while(ticket>0){
+                System.out.println(ticket--+" is saled by "+Thread.currentThread().getName());
+                RedisUtil.set(Thread.currentThread().getName(),ticket+"");
+                System.out.println("=====");
+                System.out.println(ticket+RedisUtil.get(Thread.currentThread().getName())+"11");
+                System.out.println(RedisUtil.get(Thread.currentThread().getName())+8859);
+                System.out.println("=====");
+
+            }
+        }
     }
 
     @RequestMapping(value = "/test2", method = RequestMethod.GET)

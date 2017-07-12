@@ -14,6 +14,8 @@ import java.util.Collection;
  */
 public class RedisSessionDao extends AbstractSessionDAO {
     private final static String OIL_UPMS_SHIRO_SESSION_ID = "oil-upms-shiro-session-id";
+
+
     @Override
     protected Serializable doCreate(Session session) {
         Serializable sessionId = this.generateSessionId(session);

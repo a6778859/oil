@@ -37,5 +37,6 @@
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-core:1.3.2" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="module" module-name="oil-upms-client" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-redis:1.7.5.RELEASE" level="project" />
   </component>
 </module>

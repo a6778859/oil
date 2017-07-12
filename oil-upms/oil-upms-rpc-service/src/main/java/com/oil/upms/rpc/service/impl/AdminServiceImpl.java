@@ -9,6 +9,8 @@ import com.oil.upms.rpc.api.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,12 +29,14 @@ public class AdminServiceImpl extends BaseServiceImpl<AdminMapper, Admin, AdminE
     AdminMapper adminMapper;
 
 
+    @Cacheable(value="base", key = "'selectUpmsPermissionByUpmsUserId_'")
     public long countUpsByExample(AdminExample example) {
+
         return adminMapper.countByExample(example);
 
     }
 
-
+    @CacheEvict(value="base",key="'selectUpmsPermissionByUpmsUserId_'")
     public void deleteBy() {
 
     }
@@ -44,6 +48,11 @@ public class AdminServiceImpl extends BaseServiceImpl<AdminMapper, Admin, AdminE
 
 
     public Admin selectByPrimaryKey2(Integer id) {
+        return adminMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Admin insertByPrimaryKey3(Integer id) {
         return adminMapper.selectByPrimaryKey(id);
     }
 

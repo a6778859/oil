@@ -10,16 +10,23 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class OIlUpmsRpcServiceApplication {
 
-	private static Logger _log = LoggerFactory.getLogger(OIlUpmsRpcServiceApplication.class);
+    private static Logger _log = LoggerFactory.getLogger(OIlUpmsRpcServiceApplication.class);
 
-	public static void main(String[] args) {
-		try {
-			_log.info(">>>>> oil-upms-rpc-service 正在启动 <<<<<");
-			new ClassPathXmlApplicationContext("classpath:META-INF/spring/*.xml");
-			_log.info(">>>>> oil-upms-rpc-service 启动完成 <<<<<");
-		}catch (Exception e){
-			System.out.println(e.toString());
-		}
-		}
+    public static void main(String[] args) {
+        try {
+            _log.info(">>>>> oil-upms-rpc-service 正在启动 <<<<<");
+            ClassPathXmlApplicationContext context= new ClassPathXmlApplicationContext("classpath:META-INF/spring/*.xml");
+            context.start();
+            System.out.println("输入任意按键退出 ~ ");
+	    	System.in.read();
+		    context.close();
+//
+//            new ClassPathXmlApplicationContext("classpath:META-INF/spring/*.xml");
+
+            _log.info(">>>>> oil-upms-rpc-service 启动完成 <<<<<");
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
 
 }

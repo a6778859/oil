@@ -26,6 +26,7 @@
       <module name="oil-upms-rpc-api" target="1.7" />
       <module name="oil-upms-rpc-service" target="1.7" />
       <module name="oil-upms-web" target="1.7" />
+      <module name="Test" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

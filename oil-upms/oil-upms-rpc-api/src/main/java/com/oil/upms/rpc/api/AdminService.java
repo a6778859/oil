@@ -14,6 +14,7 @@ public interface AdminService extends BaseService<Admin, AdminExample> {
 
     Admin selectByPrimaryKey2(Integer id);
 
+    Admin insertByPrimaryKey3(Integer id);
 
     public void deleteBy();
 

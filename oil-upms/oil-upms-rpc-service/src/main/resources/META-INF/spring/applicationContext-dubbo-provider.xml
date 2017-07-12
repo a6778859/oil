@@ -22,10 +22,9 @@
     <bean id="oilService" class="com.oil.upms.rpc.service.impl.OilServiceImpl"/>
     <dubbo:service interface="com.oil.upms.rpc.api.OilService" ref="oilService" />
 
-    <!-- 接口服务 -->
+
     <bean id="upmsApiService" class="com.oil.upms.rpc.service.impl.UpmsApiServiceImpl"/>
     <dubbo:service interface="com.oil.upms.rpc.api.UpmsApiService" ref="upmsApiService"/>
-
 
 
 </beans>

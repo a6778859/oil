@@ -21,6 +21,11 @@ public class AdminServiceMock extends BaseServiceMock<AdminMapper, Admin, AdminE
     }
 
     @Override
+    public Admin insertByPrimaryKey3(Integer id) {
+        return null;
+    }
+
+    @Override
     public void deleteBy() {
 
     }

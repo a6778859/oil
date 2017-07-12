@@ -9,7 +9,7 @@
 
     <dubbo:application name="oil-upms-server"/>
 
-    <dubbo:registry file="./oil-upms-server-dubbo.cache" address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:registry file="./oil-upms-server-dubbo.cache" protocol="zookeeper"  address="zookeeper://127.0.0.1:2181"/>
 
     <!-- 订阅服务 -->
     <dubbo:consumer check="false"/>
@@ -19,4 +19,5 @@
     <dubbo:reference id="oilService" interface="com.oil.upms.rpc.api.OilService" mock="true"/>
     <dubbo:reference id="adminService" interface="com.oil.upms.rpc.api.AdminService" mock="true"/>
     <dubbo:reference id="upmsApiService" interface="com.oil.upms.rpc.api.UpmsApiService" mock="true"/>
+
 </beans>
