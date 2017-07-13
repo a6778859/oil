@@ -29,20 +29,6 @@ public class Admin implements Serializable {
     private Integer errorcount;
 
     /**
-     * 加锁时间(加锁时间为1个钟头)
-     *
-     * @mbg.generated
-     */
-    private Date locktime;
-
-    /**
-     * 1为正常  2为锁住状态
-     *
-     * @mbg.generated
-     */
-    private Integer lockstate;
-
-    /**
      * 剩余金额
      *
      * @mbg.generated
@@ -111,22 +97,6 @@ public class Admin implements Serializable {
         this.errorcount = errorcount;
     }
 
-    public Date getLocktime() {
-        return locktime;
-    }
-
-    public void setLocktime(Date locktime) {
-        this.locktime = locktime;
-    }
-
-    public Integer getLockstate() {
-        return lockstate;
-    }
-
-    public void setLockstate(Integer lockstate) {
-        this.lockstate = lockstate;
-    }
-
     public BigDecimal getTotalmoney() {
         return totalmoney;
     }
@@ -177,8 +147,6 @@ public class Admin implements Serializable {
         sb.append(", username=").append(username);
         sb.append(", userpassword=").append(userpassword);
         sb.append(", errorcount=").append(errorcount);
-        sb.append(", locktime=").append(locktime);
-        sb.append(", lockstate=").append(lockstate);
         sb.append(", totalmoney=").append(totalmoney);
         sb.append(", addtime=").append(addtime);
         sb.append(", updatetime=").append(updatetime);
@@ -204,8 +172,6 @@ public class Admin implements Serializable {
             && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
             && (this.getUserpassword() == null ? other.getUserpassword() == null : this.getUserpassword().equals(other.getUserpassword()))
             && (this.getErrorcount() == null ? other.getErrorcount() == null : this.getErrorcount().equals(other.getErrorcount()))
-            && (this.getLocktime() == null ? other.getLocktime() == null : this.getLocktime().equals(other.getLocktime()))
-            && (this.getLockstate() == null ? other.getLockstate() == null : this.getLockstate().equals(other.getLockstate()))
             && (this.getTotalmoney() == null ? other.getTotalmoney() == null : this.getTotalmoney().equals(other.getTotalmoney()))
             && (this.getAddtime() == null ? other.getAddtime() == null : this.getAddtime().equals(other.getAddtime()))
             && (this.getUpdatetime() == null ? other.getUpdatetime() == null : this.getUpdatetime().equals(other.getUpdatetime()))
@@ -221,8 +187,6 @@ public class Admin implements Serializable {
         result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
         result = prime * result + ((getUserpassword() == null) ? 0 : getUserpassword().hashCode());
         result = prime * result + ((getErrorcount() == null) ? 0 : getErrorcount().hashCode());
-        result = prime * result + ((getLocktime() == null) ? 0 : getLocktime().hashCode());
-        result = prime * result + ((getLockstate() == null) ? 0 : getLockstate().hashCode());
         result = prime * result + ((getTotalmoney() == null) ? 0 : getTotalmoney().hashCode());
         result = prime * result + ((getAddtime() == null) ? 0 : getAddtime().hashCode());
         result = prime * result + ((getUpdatetime() == null) ? 0 : getUpdatetime().hashCode());

@@ -255,5 +255,4 @@
       remark = #{remark,jdbcType=VARCHAR}
     where orderid = #{orderid,jdbcType=INTEGER}
   </update>
-
 </mapper>

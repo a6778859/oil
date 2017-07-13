@@ -2,9 +2,8 @@ package com.oil.upms.dao.mapper;
 
 import com.oil.upms.dao.model.Admin;
 import com.oil.upms.dao.model.AdminExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface AdminMapper {
     long countByExample(AdminExample example);
@@ -18,6 +17,7 @@ public interface AdminMapper {
     int insertSelective(Admin record);
 
     List<Admin> selectByExample(AdminExample example);
+
     Admin selectByPrimaryKey(Integer userid);
 
     int updateByExampleSelective(@Param("record") Admin record, @Param("example") AdminExample example);
