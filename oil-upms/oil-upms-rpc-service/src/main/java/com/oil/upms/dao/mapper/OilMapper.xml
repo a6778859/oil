@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.oil.upms.dao.model.Oil">
     <id column="orderid" jdbcType="INTEGER" property="orderid" />
     <result column="useorderid" jdbcType="VARCHAR" property="useorderid" />
-    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
     <result column="money" jdbcType="DECIMAL" property="money" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
@@ -106,7 +106,7 @@
     insert into oil (orderid, useorderid, userid, 
       money, state, addtime, 
       updatetime, remark)
-    values (#{orderid,jdbcType=INTEGER}, #{useorderid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+    values (#{orderid,jdbcType=INTEGER}, #{useorderid,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
       #{money,jdbcType=DECIMAL}, #{state,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
       #{updatetime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
   </insert>
@@ -146,7 +146,7 @@
         #{useorderid,jdbcType=VARCHAR},
       </if>
       <if test="userid != null">
-        #{userid,jdbcType=VARCHAR},
+        #{userid,jdbcType=INTEGER},
       </if>
       <if test="money != null">
         #{money,jdbcType=DECIMAL},
@@ -181,7 +181,7 @@
         useorderid = #{record.useorderid,jdbcType=VARCHAR},
       </if>
       <if test="record.userid != null">
-        userid = #{record.userid,jdbcType=VARCHAR},
+        userid = #{record.userid,jdbcType=INTEGER},
       </if>
       <if test="record.money != null">
         money = #{record.money,jdbcType=DECIMAL},
@@ -207,7 +207,7 @@
     update oil
     set orderid = #{record.orderid,jdbcType=INTEGER},
       useorderid = #{record.useorderid,jdbcType=VARCHAR},
-      userid = #{record.userid,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=INTEGER},
       money = #{record.money,jdbcType=DECIMAL},
       state = #{record.state,jdbcType=INTEGER},
       addtime = #{record.addtime,jdbcType=TIMESTAMP},
@@ -224,7 +224,7 @@
         useorderid = #{useorderid,jdbcType=VARCHAR},
       </if>
       <if test="userid != null">
-        userid = #{userid,jdbcType=VARCHAR},
+        userid = #{userid,jdbcType=INTEGER},
       </if>
       <if test="money != null">
         money = #{money,jdbcType=DECIMAL},
@@ -247,7 +247,7 @@
   <update id="updateByPrimaryKey" parameterType="com.oil.upms.dao.model.Oil">
     update oil
     set useorderid = #{useorderid,jdbcType=VARCHAR},
-      userid = #{userid,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=INTEGER},
       money = #{money,jdbcType=DECIMAL},
       state = #{state,jdbcType=INTEGER},
       addtime = #{addtime,jdbcType=TIMESTAMP},

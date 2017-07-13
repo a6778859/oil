@@ -14,7 +14,7 @@ public class Oil implements Serializable {
      */
     private String useorderid;
 
-    private String userid;
+    private Integer userid;
 
     private BigDecimal money;
 
@@ -49,11 +49,11 @@ public class Oil implements Serializable {
         this.useorderid = useorderid;
     }
 
-    public String getUserid() {
+    public Integer getUserid() {
         return userid;
     }
 
-    public void setUserid(String userid) {
+    public void setUserid(Integer userid) {
         this.userid = userid;
     }
 
