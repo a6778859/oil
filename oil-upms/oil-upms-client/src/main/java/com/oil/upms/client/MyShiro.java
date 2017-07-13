@@ -1,9 +1,11 @@
 package com.oil.upms.client;
 
+import com.oil.common.util.AESUtil;
 import com.oil.common.util.RedisUtil;
 import com.oil.common.util.StringUtil;
 import com.oil.upms.dao.model.Admin;
 import com.oil.upms.rpc.api.UpmsApiService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -21,7 +23,6 @@ public class MyShiro extends AuthorizingRealm {
     @Autowired
     UpmsApiService upmsApiService;
     private String myshiro_lock = "myShiro_lock_";
-
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //获取登录时输入的用户名
@@ -89,6 +90,7 @@ public class MyShiro extends AuthorizingRealm {
 //        }
             //若存在，将此用户存放到登录认证info中
             RedisUtil.remove(key);
+            SecurityUtils.getSubject().getSession().setAttribute("user", AESUtil.AESEncode(user.getUserid()+""));
             return new SimpleAuthenticationInfo(user.getUsername(), user.getUserpassword(), getName());
         }
 

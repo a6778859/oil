@@ -145,6 +145,7 @@ public class HomeController extends BaseController {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user(ModelMap modelMap) {
+        System.out.println(session.getAttribute("user")+"用户sesson");
         AdminExample admin = new AdminExample();
         admin.createCriteria().andUseridEqualTo(1);
         adminService.deleteBy();
