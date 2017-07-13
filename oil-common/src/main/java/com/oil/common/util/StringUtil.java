@@ -3,6 +3,7 @@ package com.oil.common.util;
 
 import org.apache.commons.lang.StringUtils;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -153,5 +154,32 @@ public class StringUtil {
             return defaultValue;
         }
     }
+
+    /**
+     * 判断字符串是否为空
+     *
+     * @param s
+     * @return
+     */
+    public static boolean isBlank(String s) {
+        if (s == null || s.length() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 判断List是否为空
+     *
+     * @param s
+     * @return
+     */
+    public static boolean isBlank(List s) {
+        if (s == null || s.size() <= 0) {
+            return true;
+        }
+        return false;
+    }
+
 
 }

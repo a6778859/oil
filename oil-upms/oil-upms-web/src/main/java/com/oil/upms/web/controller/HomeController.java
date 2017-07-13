@@ -3,6 +3,7 @@ package com.oil.upms.web.controller;
 import com.oil.common.base.BaseController;
 import com.oil.common.util.MD5Util;
 import com.oil.common.util.RedisUtil;
+import com.oil.upms.dao.model.Admin;
 import com.oil.upms.dao.model.AdminExample;
 import com.oil.upms.rpc.api.AdminService;
 import com.oil.upms.rpc.api.UpmsApiService;
@@ -38,24 +39,10 @@ public class HomeController extends BaseController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test(ModelMap modelMap) throws IOException {
-        AdminExample admin = new AdminExample();
-        admin.createCriteria().andUseridEqualTo(1);
-        admin.createCriteria().andUseridEqualTo(1);
-        adminService.deleteBy();
-        admin.createCriteria().andUseridEqualTo(1);
-        adminService.deleteBy();
-        MutliThread m1=new MutliThread("Window 1");
-        MutliThread m2=new MutliThread("Window 2");
-        m1.start();
-        m2.start();
-
-
-        RedisUtil.set("8859","12121",1200);
-        //
-
-        adminService.deleteBy();
-        System.out.println( adminService.countUpsByExample(admin));
-        System.out.println(RedisUtil.get("8859"));
+          Admin test = adminService.test(1);
+        System.out.println(test+"master");
+        test = adminService.insert2(1);
+        System.out.println(test+"master");
         return null;
 //
 //        AdminExample admin = new AdminExample();
@@ -149,7 +136,7 @@ public class HomeController extends BaseController {
             write("账号或密码错误");
             return null;
         } catch (LockedAccountException e) {
-            write("帐号已锁定！");
+            write("帐号已锁定！请等待20分钟");
             return null;
         }
         return "redirect:/home/user";

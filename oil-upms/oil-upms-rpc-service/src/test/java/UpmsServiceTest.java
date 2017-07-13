@@ -1,6 +1,5 @@
-import com.oil.upms.dao.model.AdminExample;
+import com.oil.upms.dao.model.Admin;
 import com.oil.upms.rpc.api.AdminService;
-import com.oil.upms.rpc.api.UpmsApiService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +14,37 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({
         "classpath:applicationContext.xml",
-        "classpath:test/applicationContext-dubbo-consumer.xml"
+        "classpath:META-INF/spring/applicationContext-jdbc.xml",
+        "classpath:META-INF/spring/applicationContext-listener.xml"
 })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public class UpmsServiceTest {
-
-    @Autowired
-    UpmsApiService upmsApiService;
 
     @Autowired
     AdminService adminService;
 
     @Test
     public void index() {
-        AdminExample admin= new AdminExample();
-        admin.createCriteria().andUseridEqualTo(1);
-        adminService.deleteBy();
-        System.out.println(adminService.countUpsByExample(admin));
-
+        Admin test = adminService.test(1);
+        System.out.println(test+"master");
+        test = adminService.insert2(1);
+        System.out.println(test+"master");
     }
+
+//    @Test
+//    public void selectForPage() {
+//        // 根据条件，按页码+每页条数分页
+//        UpmsPermissionExample upmsPermissionExample = new UpmsPermissionExample();
+//        upmsPermissionExample.createCriteria()
+//                .andSystemIdEqualTo(1);
+//        List<UpmsPermission> upmsPermissions = upmsPermissionService.selectByExampleForStartPage(upmsPermissionExample, 2, 20);
+//        System.out.println(upmsPermissions.size());
+//        // 根据条件，按offset+limit分页
+//        upmsPermissionExample = new UpmsPermissionExample();
+//        upmsPermissionExample.createCriteria()
+//                .andSystemIdEqualTo(2);
+//        upmsPermissions = upmsPermissionService.selectByExampleForOffsetPage(upmsPermissionExample, 3, 5);
+//        System.out.println(upmsPermissions.size());
+//    }
 
 }

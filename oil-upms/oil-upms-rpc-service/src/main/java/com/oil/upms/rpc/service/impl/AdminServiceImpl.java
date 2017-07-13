@@ -31,7 +31,6 @@ public class AdminServiceImpl extends BaseServiceImpl<AdminMapper, Admin, AdminE
 
     @Cacheable(value="base", key = "'selectUpmsPermissionByUpmsUserId_'")
     public long countUpsByExample(AdminExample example) {
-
         return adminMapper.countByExample(example);
 
     }
@@ -43,8 +42,19 @@ public class AdminServiceImpl extends BaseServiceImpl<AdminMapper, Admin, AdminE
 
     @Override
     public Admin test(Integer id) {
+        Admin admin=insert2(id);
+        System.out.println(admin+"sla");
         return adminMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public Admin insert2(Integer id) {
+//        Admin admin=test(id);
+//        System.out.println(admin);
+        return adminMapper.selectByPrimaryKey(id);
+    }
+
+
 
 
     public Admin selectByPrimaryKey2(Integer id) {

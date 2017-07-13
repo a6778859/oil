@@ -1,5 +1,7 @@
 package com.oil.upms.client;
 
+import com.oil.common.util.RedisUtil;
+import com.oil.common.util.StringUtil;
 import com.oil.upms.dao.model.Admin;
 import com.oil.upms.rpc.api.UpmsApiService;
 import org.apache.shiro.authc.*;
@@ -18,6 +20,7 @@ import java.util.Set;
 public class MyShiro extends AuthorizingRealm {
     @Autowired
     UpmsApiService upmsApiService;
+    private String myshiro_lock = "myShiro_lock_";
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -53,23 +56,41 @@ public class MyShiro extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-
         //UsernamePasswordToken对象用来存放提交的登录信息
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        //查出是否有此用户
-        Admin user = upmsApiService.selectForUser(token.getUsername());
-        if (user == null) {
-            throw new UnknownAccountException();
-        }
-        if (!user.getUserpassword().equals(String.valueOf(token.getPassword()))) {
-            throw new UnknownAccountException();
-        }
-        if (user.getLockstate() != 1) {
-            throw new LockedAccountException();
-        }
+        synchronized (token.getUsername()) {
+            //判断用户名中的redis是否存在
+            String key="myShiro_lock" + token.getUsername();
+            String lock_num = RedisUtil.get(key);
+            int lock_int = 0;
+            if (!StringUtil.isBlank(lock_num)) {
+                lock_int = StringUtil.getInt(lock_num);
+                if (lock_int >= 5) {
+                    //账号被锁定
+                    throw new LockedAccountException();
+                }
+            } else {
+                RedisUtil.set(key, "0", 600);
+            }
 
-        //若存在，将此用户存放到登录认证info中
-        return new SimpleAuthenticationInfo(user.getUsername(), user.getUserpassword(), getName());
+            //查出是否有此用户
+            Admin user = upmsApiService.selectForUser(token.getUsername());
+            if (user == null) {
+                throw new UnknownAccountException();
+            }
+            //密码错误
+            if (!user.getUserpassword().equals(String.valueOf(token.getPassword()))) {
+                RedisUtil.set("myShiro_lock" + token.getUsername(), lock_int + 1 + "", 600);
+                throw new UnknownAccountException();
+            }
+            //密码错误超过五次记录到redis中，如果并修改错误次数为0
+//        if (user.getLockstate() != 1) {
+//            throw new LockedAccountException();
+//        }
+            //若存在，将此用户存放到登录认证info中
+            RedisUtil.remove(key);
+            return new SimpleAuthenticationInfo(user.getUsername(), user.getUserpassword(), getName());
+        }
 
 
     }

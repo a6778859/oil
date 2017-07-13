@@ -34,4 +34,9 @@ public class AdminServiceMock extends BaseServiceMock<AdminMapper, Admin, AdminE
     public Admin test(Integer id) {
         return null;
     }
+
+    @Override
+    public Admin insert2(Integer id) {
+        return null;
+    }
 }

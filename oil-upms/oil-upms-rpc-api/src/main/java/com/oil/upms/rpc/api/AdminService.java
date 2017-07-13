@@ -19,4 +19,5 @@ public interface AdminService extends BaseService<Admin, AdminExample> {
     public void deleteBy();
 
     Admin test(Integer id);
+    Admin insert2(Integer id);
 }
