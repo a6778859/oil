@@ -6,6 +6,7 @@ import com.oil.common.util.RedisUtil;
 import com.oil.upms.dao.model.Admin;
 import com.oil.upms.dao.model.AdminExample;
 import com.oil.upms.rpc.api.AdminService;
+import com.oil.upms.rpc.api.OilService;
 import com.oil.upms.rpc.api.UpmsApiService;
 import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
@@ -36,6 +37,8 @@ public class HomeController extends BaseController {
     AdminService adminService;
     @Autowired
     UpmsApiService upmsApiService;
+    @Autowired
+    OilService oilService;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test(ModelMap modelMap) throws IOException {
@@ -152,6 +155,25 @@ public class HomeController extends BaseController {
         System.out.println(adminService.countUpsByExample(admin));
         return "/home/user.jsp";
     }
+
+
+    /**
+     * 油卡充值
+     * @return
+     */
+    @RequestMapping(value = "/recharge", method = RequestMethod.GET)
+    public String recharge(String useorderid,String userid,String money){
+//        Oil oil=new Oil();
+//        oil.setUserid(1);
+//        oil.setUseorderid(UUID.randomUUID().toString());
+//        oil.setAddtime(new Date());
+//        oilService.insert(oil);
+        return null;
+    }
+
+
+
+
 
 
 }

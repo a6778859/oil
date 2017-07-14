@@ -32,6 +32,7 @@
                 /home/login=anon
                 /home/test=anon
                 /home/test2=anon
+                /home/recharge=anon
                 <!-- perms[user:query]表示访问此连接需要权限为user:query的用户 -->
                 <!-- /user=perms[user:query] -->
                <!-- roles[manager]表示访问此连接需要用户的角色为manager -->
