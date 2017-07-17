@@ -124,6 +124,13 @@
     <orderEntry type="library" name="Maven: org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: commons-net:commons-net:3.1" level="project" />
     <orderEntry type="library" name="Maven: org.jasypt:jasypt:1.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.activemq:activemq-spring:5.7.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.activemq:activemq-pool:5.7.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.geronimo.specs:geronimo-jta_1.0.1B_spec:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-pool:commons-pool:1.6" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.osgi:spring-osgi-core:1.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.osgi:spring-osgi-io:1.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.xbean:xbean-spring:4.5" level="project" />
     <orderEntry type="library" name="Maven: net.sf.json-lib:json-lib:jdk15:2.4" level="project" />
     <orderEntry type="library" name="Maven: net.sf.ezmorph:ezmorph:1.0.6" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.28" level="project" />

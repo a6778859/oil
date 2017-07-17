@@ -54,7 +54,6 @@ public class HomeController extends BaseController {
 //        System.out.println( adminService.countUpsByExample(admin));
 //        System.out.println( adminService.selectByPrimaryKey2(1));
 //        System.out.println( adminService.insertByPrimaryKey3(1));
-
         // System.out.println(adminService.countByExample(admin));
 
 
@@ -94,22 +93,18 @@ public class HomeController extends BaseController {
                 System.out.println(ticket+RedisUtil.get(Thread.currentThread().getName())+"11");
                 System.out.println(RedisUtil.get(Thread.currentThread().getName())+8859);
                 System.out.println("=====");
-
             }
         }
     }
 
     @RequestMapping(value = "/test2", method = RequestMethod.GET)
     public String test2(ModelMap modelMap) throws IOException {
-
         java.util.Enumeration e = request.getSession().getAttributeNames();
         while (e.hasMoreElements()) {
             String sessionName = (String) e.nextElement();
             System.out.println("\nsession item name=" + sessionName);
             System.out.println("\nsession item value=" + request.getSession().getAttribute(sessionName));
         }
-
-
         write(session.getAttribute("8859") + "");
         return null;
     }
