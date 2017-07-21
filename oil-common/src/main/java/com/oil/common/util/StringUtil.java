@@ -175,7 +175,7 @@ public class StringUtil {
      * @return
      */
     public static boolean isBlank(List s) {
-        if (s == null || s.size() <= 0) {
+        if (s.isEmpty()) {
             return true;
         }
         return false;

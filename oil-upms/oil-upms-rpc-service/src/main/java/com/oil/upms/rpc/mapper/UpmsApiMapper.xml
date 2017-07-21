@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oil.upms.rpc.mapper.UpmsApiMapper">
 
-    <resultMap id="BaseResultMap" type="com.oil.upms.dao.model.Admin">
+    <resultMap id="AdminResultMap" type="com.oil.upms.dao.model.Admin">
         <id column="userid" jdbcType="INTEGER" property="userid"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="userpassword" jdbcType="VARCHAR" property="userpassword"/>
@@ -13,17 +13,53 @@
         <result column="state" jdbcType="INTEGER" property="state"/>
         <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
     </resultMap>
-    <sql id="Base_Column_List">
+    <resultMap id="OilResultMap" type="com.oil.upms.dao.model.Oil">
+        <id column="orderid" jdbcType="INTEGER" property="orderid"/>
+        <result column="useorderid" jdbcType="VARCHAR" property="useorderid"/>
+        <result column="userid" jdbcType="INTEGER" property="userid"/>
+        <result column="money" jdbcType="DECIMAL" property="money"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="addtime" jdbcType="TIMESTAMP" property="addtime"/>
+        <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+
+    <sql id="Admin_Column_List">
         userid, username, userpassword, errorcount,totalmoney,
         addtime,
         updatetime, state,role_id
     </sql>
 
-    <select id="selectForUser" resultMap="BaseResultMap">
+    <sql id="Oil_Column_List">
+        orderid, useorderid, userid, money, state, addtime, updatetime, remark
+    </sql>
+
+    <select id="selectForUser" resultMap="AdminResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Admin_Column_List"/>
         from admin
         where username = #{username}
     </select>
+
+
+    <insert id="insertOilList" parameterType="java.util.List">
+        insert into oil(useorderid,userid,addtime,remark)  VALUES
+        <foreach collection="list" item="item" separator="," >
+            (  #{item.useorderid},
+            #{item.userid},
+            #{item.addtime},
+            #{item.remark} )
+        </foreach>
+    </insert>
+
+    <select id="selectForUserOrderid"  resultMap="OilResultMap">
+        select
+        orderid
+        from oil
+        where useorderid=#{useorderid} and userid=#{userid}
+    </select>
+
+
 
 </mapper>

@@ -9,7 +9,7 @@
 
     <dubbo:application name="oil-upms-server"/>
 
-    <dubbo:registry file="./oil-upms-server-dubbo.cache" protocol="zookeeper"  address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:registry file="./oil-upms-server-dubbo.cache"   address="zookeeper://127.0.0.1:2181"/>
     <!--<dubbo:registry  protocol="zookeeper" address="127.0.0.1:2181,127.0.0.1:2182" />-->
     <!-- 订阅服务 -->
     <dubbo:consumer check="false"/>

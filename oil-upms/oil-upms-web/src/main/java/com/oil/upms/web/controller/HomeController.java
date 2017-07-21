@@ -42,10 +42,10 @@ public class HomeController extends BaseController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test(ModelMap modelMap) throws IOException {
-          Admin test = adminService.test(1);
-        System.out.println(test+"master");
+        Admin test = adminService.test(1);
+        System.out.println(test + "master");
         test = adminService.insert2(1);
-        System.out.println(test+"master");
+        System.out.println(test + "master");
         return null;
 //
 //        AdminExample admin = new AdminExample();
@@ -80,18 +80,20 @@ public class HomeController extends BaseController {
 //        return null;
     }
 
-    class MutliThread extends Thread{
-        private int ticket=10;//每个线程都拥有5张票
-        MutliThread(String name){
+    class MutliThread extends Thread {
+        private int ticket = 10;//每个线程都拥有5张票
+
+        MutliThread(String name) {
             super(name);//调用父类带参数的构造方法
         }
-        public void run(){
-            while(ticket>0){
-                System.out.println(ticket--+" is saled by "+Thread.currentThread().getName());
-                RedisUtil.set(Thread.currentThread().getName(),ticket+"");
+
+        public void run() {
+            while (ticket > 0) {
+                System.out.println(ticket-- + " is saled by " + Thread.currentThread().getName());
+                RedisUtil.set(Thread.currentThread().getName(), ticket + "");
                 System.out.println("=====");
-                System.out.println(ticket+RedisUtil.get(Thread.currentThread().getName())+"11");
-                System.out.println(RedisUtil.get(Thread.currentThread().getName())+8859);
+                System.out.println(ticket + RedisUtil.get(Thread.currentThread().getName()) + "11");
+                System.out.println(RedisUtil.get(Thread.currentThread().getName()) + 8859);
                 System.out.println("=====");
             }
         }
@@ -143,7 +145,7 @@ public class HomeController extends BaseController {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user(ModelMap modelMap) {
-        System.out.println(session.getAttribute("user")+"用户sesson");
+        System.out.println(session.getAttribute("user") + "用户sesson");
         AdminExample admin = new AdminExample();
         admin.createCriteria().andUseridEqualTo(1);
         adminService.deleteBy();
@@ -154,21 +156,20 @@ public class HomeController extends BaseController {
 
     /**
      * 油卡充值
+     *
      * @return
      */
     @RequestMapping(value = "/recharge", method = RequestMethod.GET)
-    public String recharge(String useorderid,String userid,String money){
+    public String recharge(String useorderid, String userid, String money) {
 //        Oil oil=new Oil();
 //        oil.setUserid(1);
 //        oil.setUseorderid(UUID.randomUUID().toString());
 //        oil.setAddtime(new Date());
 //        oilService.insert(oil);
+
+
         return null;
     }
-
-
-
-
 
 
 }

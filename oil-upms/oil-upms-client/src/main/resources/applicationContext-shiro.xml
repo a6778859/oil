@@ -29,6 +29,7 @@
         <property name="filterChainDefinitions">
             <value>
                 <!-- anon表示此地址不需要任何权限即可访问 -->
+                /activemq/**=anon
                 /home/login=anon
                 /home/test=anon
                 /home/test2=anon

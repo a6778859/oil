@@ -15,6 +15,12 @@ import java.io.ObjectOutputStream;
  */
 public class SerializableUtil {
 
+    /**
+     * 序列化
+     *
+     * @param session
+     * @return
+     */
     public static String serialize(Session session) {
         if (null == session) {
             return null;
@@ -29,6 +35,7 @@ public class SerializableUtil {
         }
     }
 
+    //反序列化
     public static Session deserialize(String sessionStr) {
         if (StringUtils.isBlank(sessionStr)) {
             return null;
@@ -43,3 +50,6 @@ public class SerializableUtil {
     }
 
 }
+
+
+

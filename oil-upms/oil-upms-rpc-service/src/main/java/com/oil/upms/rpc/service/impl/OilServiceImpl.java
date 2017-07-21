@@ -26,4 +26,8 @@ public class OilServiceImpl extends BaseServiceImpl<OilMapper, Oil, OilExample> 
     @Autowired
     OilMapper oilMapper;
 
+
+
+
+
 }

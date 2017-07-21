@@ -98,8 +98,8 @@
     <!--简单的一个master和一个slaver 读写分离的数据源 -->
     <!--简单的一个master和一个slaver 读写分离的数据源 -->
 
-    <bean id="dataSource"  class="com.oil.common.DataSource.DynamicDataSource">
-        <property name="writeDataSource"  ref="masterDataSource"></property>
+    <bean id="dataSource" class="com.oil.common.DataSource.DynamicDataSource">
+        <property name="writeDataSource" ref="masterDataSource"></property>
         <property name="readDataSource" ref="slaveDataSource"></property>
     </bean>
 
@@ -112,7 +112,7 @@
         <!--<property name="mapperLocations" value="classpath*:com/oil/upms/dao/mapper/*Mapper.xml"/> -->
         <property name="plugins">
             <array>
-                <bean class="com.oil.common.DataSource.DynamicPlugin" />
+                <bean class="com.oil.common.DataSource.DynamicPlugin"/>
             </array>
         </property>
     </bean>
@@ -125,26 +125,27 @@
 
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="delete*" propagation="REQUIRED" />
-            <tx:method name="insert*" propagation="REQUIRED" />
-            <tx:method name="update*" propagation="REQUIRED" />
-            <tx:method name="save*" propagation="REQUIRED"  />
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
             <tx:method name="*" propagation="REQUIRED" read-only="true"/>
         </tx:attributes>
     </tx:advice>
 
     <aop:config>
-        <aop:pointcut id="pc" expression="execution(* com.oil.upms.rpc.service.impl.*.*(..))" />
-        <aop:advisor pointcut-ref="pc" advice-ref="txAdvice" />
+        <aop:pointcut id="pc" expression="execution(* com.oil.upms.rpc.service.impl.*.*(..))"/>
+        <aop:advisor pointcut-ref="pc" advice-ref="txAdvice"/>
     </aop:config>
 
-    <!-- 启动注解事务 -->
-    <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <!-- 事务管理器 -->
     <bean id="transactionManager" class="com.oil.common.DataSource.DynamicDataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+
+    <!-- 启动注解事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
 </beans>
