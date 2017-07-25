@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-<!-- 配置权限管理器 -->
+    <!-- 配置权限管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- ref对应我们写的realm  MyShiro -->
         <property name="realm" ref="upmsRealm"/>
@@ -29,6 +29,7 @@
         <property name="filterChainDefinitions">
             <value>
                 <!-- anon表示此地址不需要任何权限即可访问 -->
+                /resources/**=anon
                 /activemq/**=anon
                 /home/login=anon
                 /home/test=anon
@@ -36,7 +37,7 @@
                 /home/recharge=anon
                 <!-- perms[user:query]表示访问此连接需要权限为user:query的用户 -->
                 <!-- /user=perms[user:query] -->
-               <!-- roles[manager]表示访问此连接需要用户的角色为manager -->
+                <!-- roles[manager]表示访问此连接需要用户的角色为manager -->
                 /home/**=roles[admin]
                 <!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/login-->
                 /** = authc
@@ -45,11 +46,10 @@
     </bean>
 
 
-    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
-   <!-- Shiro生命周期处理器-->
-    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+    <!-- Shiro生命周期处理器-->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
     <bean id="upmsRealm" class="com.oil.upms.client.MyShiro"></bean>
-
 
 
     <bean id="webSessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">

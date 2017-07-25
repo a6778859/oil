@@ -43,7 +43,8 @@ public class ActivemqController extends BaseController {
     OilService oilService;
     @Autowired
     ThreadPoolTaskExecutor threadPoolTaskExecutor;
-    private static int test_i=0;
+    private static int test_i = 0;
+
     /**
      * 发送消息到队列
      *
@@ -102,38 +103,38 @@ public class ActivemqController extends BaseController {
      */
     @RequestMapping(value = "/recharge", method = RequestMethod.GET)
     public synchronized String recharge() {
-        System.exit(0);
-
-        try {
-            //没1000条插入
-            List<Oil> oilList = new ArrayList();
-            int batchCount = 1000;// 每批commit的个数
-            int batchLastIndex = batchCount;// 每批最后一个的下标
-            Oil oil;
-            while (!queue.isEmpty()) {
-                oil = queue.poll();
-                oilList.add(oil);
-            }
-            int total_size = 0;
-            if (!oilList.isEmpty() && oilList.size() > 0) {
-                total_size = oilList.size();
-            }
-            if (total_size > 0) {
-                for (int index = 0; index < total_size; ) {
-                    if (batchLastIndex >= total_size) {
-                        batchLastIndex = total_size;
-                        upmsApiService.insertOilList(oilList.subList(index, batchLastIndex));
-                        break;
-                    } else {
-                        upmsApiService.insertOilList(oilList.subList(index, batchLastIndex));
-                        index = batchLastIndex;
-                        batchLastIndex = index + (batchCount - 1);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            _log.info("系统异常");
-        }
+        /**
+         try {
+         //没1000条插入
+         List<Oil> oilList = new ArrayList();
+         int batchCount = 1000;// 每批commit的个数
+         int batchLastIndex = batchCount;// 每批最后一个的下标
+         Oil oil;
+         while (!queue.isEmpty()) {
+         oil = queue.poll();
+         oilList.add(oil);
+         }
+         int total_size = 0;
+         if (!oilList.isEmpty() && oilList.size() > 0) {
+         total_size = oilList.size();
+         }
+         if (total_size > 0) {
+         for (int index = 0; index < total_size; ) {
+         if (batchLastIndex >= total_size) {
+         batchLastIndex = total_size;
+         upmsApiService.insertOilList(oilList.subList(index, batchLastIndex));
+         break;
+         } else {
+         upmsApiService.insertOilList(oilList.subList(index, batchLastIndex));
+         index = batchLastIndex;
+         batchLastIndex = index + (batchCount - 1);
+         }
+         }
+         }
+         } catch (Exception e) {
+         _log.info("系统异常");
+         }
+         **/
         return null;
     }
 

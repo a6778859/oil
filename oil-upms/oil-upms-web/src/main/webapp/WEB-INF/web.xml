@@ -93,5 +93,9 @@
     <location>/WEB-INF/jsp/error.jsp</location>
   </error-page>
 
+  <listener>
+    <listener-class>listener.ServletContextLoaderListener</listener-class>
+  </listener>
+
 
 </web-app>
