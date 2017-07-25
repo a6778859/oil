@@ -5,9 +5,9 @@ import com.oil.upms.dao.model.Admin;
 import com.oil.upms.dao.model.AdminExample;
 
 /**
-* AdminService接口
-* Created by shuzheng on 2017/6/21.
-*/
+ * AdminService接口
+ * Created by shuzheng on 2017/6/21.
+ */
 public interface AdminService extends BaseService<Admin, AdminExample> {
 
     public long countUpsByExample(AdminExample example);
@@ -19,5 +19,6 @@ public interface AdminService extends BaseService<Admin, AdminExample> {
     public void deleteBy();
 
     Admin test(Integer id);
+
     Admin insert2(Integer id);
 }
