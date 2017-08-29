@@ -18,6 +18,12 @@ public interface UpmsApiService {
 
     public void insertOilList(List<Oil> oilList);
 
+    /**
+     * 判断该单是否重复入库
+     * @param userid
+     * @param useorderid
+     * @return
+     */
     Oil selectForUserOrderid(@Param("userid") int userid,@Param("useorderid") String useorderid);
 
 }
